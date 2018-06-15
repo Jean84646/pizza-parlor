@@ -34,6 +34,11 @@ $(document).ready(function(){
     var perPizza = new Pizza(arrayToppings, pizzaSize);
 
     $("button#add-pizza").click(function() {
+      arrayToppings.forEach(function(item) {
+        $("ul#itemize").append("<li>" + item + "</li>");
+      });
+
+      $("ul#itemize").append("<li>" + pizzaSize + ' "' + "</li>");
       
       perPizza.price = perPizza.calculatePrice();
       $("#total-price").text(perPizza.price);
