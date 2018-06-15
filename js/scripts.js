@@ -1,24 +1,43 @@
 // Business logic
 function Pizza(toppings, size, price){
-  this.toppings = toppings [];
-  this.size = size;
+  this.toppings = [];
+  this.pizzaSize = size;
   this.price = 0;
 };
 
+var arrayToppings = [];
+
 Pizza.prototype.calculatePrice = function() {
   const STANDARD = 12;
-  var extraToppings = 0;
+  var extraCharge = 0;
 
-  if
-}
+  if(arrayToppings.length > 1){
+    extraCharge += 2;
+  } else if(pizzaSize === 14) {
+    extraCharge += 3;
+  } else if (pizzaSize === 16){
+    extraCharge += 6;
+  };
+
+  return STANDARD + extraCharge;
+};
 
 // User interface logic
 $(document).ready(function(){
   $("form#form-toppings").submit(function(event){
     event.preventDefault();
+
     $("input:checkbox[name=toppings]:checked").each(function(){
-      var topping = $(this).val();
+      var toppings = $(this).val();
+      arrayToppings.push(toppings);
     });
-    var perPizza = new Pizza(pizzaTopping, pizzaSize);
+
+    var pizzaSize = parseInt($("input:radio[name=size]:checked").val());
+
+    var perPizza = new Pizza(arrayToppings, pizzaSize);
+
+    perPizza.price = perPizza.calculatePrice();
+
+    $("#total-price").text(perPizza.price);
   });
 });
