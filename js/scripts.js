@@ -19,7 +19,6 @@ Pizza.prototype.calculatePrice = function() {
   } else if (pizzaSize === 16){
     extraCharge += 6;
   };
-
   return STANDARD + extraCharge;
 };
 
@@ -27,20 +26,19 @@ Pizza.prototype.calculatePrice = function() {
 $(document).ready(function(){
   $("form#form-toppings").submit(function(event){
     event.preventDefault();
-
     $("input:checkbox[name=toppings]:checked").each(function(){
       var toppings = $(this).val();
       arrayToppings.push(toppings);
     });
-
     pizzaSize = parseInt($("input:radio[name=size]:checked").val());
-
     var perPizza = new Pizza(arrayToppings, pizzaSize);
 
     $("button#add-pizza").click(function() {
-    perPizza.price = perPizza.calculatePrice();
-    $("#total-price").text(perPizza.price);
-    $("#output-area").show();
-    });
+      
+      perPizza.price = perPizza.calculatePrice();
+      $("#total-price").text(perPizza.price);
+      $("#output-area").show();
+      });
+
   });
 });
