@@ -11,11 +11,11 @@ var pizzaSize = "";
 Pizza.prototype.calculatePrice = function() {
   const STANDARD = 12;
   var extraCharge = 0;
-
-  if(arrayToppings.length > 1 && pizzaSize === 12) {
+debugger;
+  if (arrayToppings.length > 1 && pizzaSize === 12) {
     extraCharge += 2;
-  } else if(pizzaSize === 14) {
-    extraCharge += 3;
+  } else if (pizzaSize === 14) {
+    extraCharge += 4;
   } else if (pizzaSize === 16) {
     extraCharge += 6;
   };
@@ -33,6 +33,8 @@ $(document).ready(function() {
       pizzaSize = parseInt($("input:radio[name=size]:checked").val());
       var perPizza = new Pizza(arrayToppings, pizzaSize);
 
+      $("ul#itemize").children().remove();
+
       arrayToppings.forEach(function(item) {
         $("ul#itemize").append("<li>" + item + "</li>");
       });
@@ -41,6 +43,10 @@ $(document).ready(function() {
 
       perPizza.price = perPizza.calculatePrice();
       $("#total-price").text(perPizza.price);
+
+      arrayToppings = [];
+
       $("#output-area").show();
+      $("#form-toppings").trigger("reset");
   });
 });
